@@ -36,7 +36,7 @@ faster, and UHL reports no Type 3 attendances. Comparing **Type 1 departments on
 **1.2 points** (59.4% vs 60.6%).
 
 **2. Leicester is improving.**
-UHL's Type 1 performance rose from an average of **56.5%** in the first six months to **61.1%** in the last six
+UHL's Type 1 performance rose from an average of **56.4%** in the first six months to **61.1%** in the last six
 (**+4.6 points**); England improved by 3.8 points. Since March 2026 the two lines have moved almost together.
 
 ![UHL vs England, Type 1 four-hour performance, Oct 2024 – Sep 2026](images/uhl_vs_england_type1.png)
@@ -62,8 +62,9 @@ Bonferroni-corrected threshold is 0.05 / 3 ≈ 0.017 — England and the gap sti
   This is an association, not proof of cause.
 
 ## Data quality
-- **Double counting:** each file includes an England `TOTAL` row. The analysis uses that row for England and checks
-  that it equals the sum of all provider rows, rather than adding everything together.
+- **Double counting:** each file includes an England `TOTAL` row. The analysis uses that row for England, rather
+  than adding everything together, and checks in **every one of the 24 months** that the `TOTAL` row equals the sum
+  of all provider rows (attendances and waits over four hours). All 24 months match.
 - **Inconsistent labels:** the `TOTAL` label was `"TOTAL "` (trailing space) in May 2026 and `"Total"` in
   June–July 2026, so a simple filter found only 21 of the 24 months. Stripping spaces and upper-casing the codes
   fixed it.
@@ -73,7 +74,7 @@ Bonferroni-corrected threshold is 0.05 / 3 ≈ 0.017 — England and the gap sti
 ## Method
 1. Explore one month (September 2026): structure, missing values, the UHL row (`RWE`).
 2. Calculate four-hour performance for UHL and England, then repeat for Type 1 only (fair comparison).
-3. Download and combine 24 monthly files; clean text columns.
+3. Download and combine 24 monthly files; clean text columns; check the England `TOTAL` row in every month.
 4. Build the 24-month table and line chart; compare winter (Dec–Feb) with the rest of the year.
 5. Test the winter difference with a Mann-Whitney U test (small samples, no normality assumption).
 6. Test two explanations: patient numbers, and admissions / 12-hour waits.
@@ -83,8 +84,8 @@ Bonferroni-corrected threshold is 0.05 / 3 ≈ 0.017 — England and the gap sti
 ## Recommendations
 1. **Protect Leicester's winter resilience.** Find out what UHL does differently in winter (for example bed
    management or discharge planning) and keep it.
-2. **Track 12-hour waits as an early-warning measure** — they rise when wards fill up, before four-hour
-   performance falls.
+2. **Track 12-hour waits alongside four-hour performance** — in this data they rose in winter for both UHL and
+   England. Whether they give an earlier warning would need weekly or daily data.
 3. **Report like-for-like comparisons.** Compare Type 1 with Type 1, or with a peer group of similar large
    hospitals, rather than with England's all-types figure.
 
